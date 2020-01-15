@@ -15,9 +15,27 @@ data "archive_file" "slack_notification_zip" {
 	output_path = "../builds/${random_string.build_name.result}-app.zip"
 }
 
+data "template_file" "sidecar_app_index" {
+	template = file("../sidecar_app/index.js")
+}
+
+data "template_file" "sidecar_app_json" {
+        template = file("../sidecar_app/package.json")
+}
+
 data "archive_file" "sidecar_app_zip" {
 	type = "zip"
-	source_dir = "../sidecar_app/"
+
+	source {
+		filename = "index.js"
+		content = data.template_file.sidecar_app_index.rendered
+	}
+
+	source {
+                filename = "package.json"
+                content = data.template_file.sidecar_app_json.rendered
+        }
+
 	output_path = "../builds/${random_string.build_name.result}-sidecar_app.zip"
 }
 
