@@ -1,0 +1,4 @@
+builds/*.zip
+.credentials/*.json
+
+terraform/.terraform/
