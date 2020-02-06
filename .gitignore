@@ -1,4 +1,4 @@
-builds/*.zip
+builds/
 .credentials/*.json
 
 terraform/.terraform/
